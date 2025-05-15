@@ -1,4 +1,4 @@
-package net.mcutils.nbt_manual;
+package net.foxzin.nbtconsole;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -28,30 +28,18 @@ import javax.swing.text.Document;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 
-public class Main {
+public class MainGitHub {
 	String fileOutput = "output.nbt";
 	private void Window() {
 		
 		URL[] icnArrayTest = {
-				Main.class.getResource("/tag_list.png"),
-				Main.class.getResource("/tag_base64_array.png"), 
-				Main.class.getResource("/tag_byte.png"),
-				Main.class.getResource("/tag_squareroot.png"),
-				Main.class.getResource("/tag_zlib.png"),
-				Main.class.getResource("/tag_compound.png"),
-				Main.class.getResource("/tag_double.png")
+				MainGitHub.class.getResource("/tag_list.png"),
+				MainGitHub.class.getResource("/tag_byte.png"),
+				MainGitHub.class.getResource("/tag_compound.png"),
+				MainGitHub.class.getResource("/tag_double.png"),
+				MainGitHub.class.getResource("/tag_int_array.png"),
+				MainGitHub.class.getResource("/tag_short.png")
 		};
-		
-		// Deprecated?
-		/*String[] iconsArray = {
-				"../res/tag_list.png",
-				"../res/tag_base64_array.png", 
-				"../res/tag_byte.png",
-				"../res/tag_squareroot.png",
-				"../res/tag_zlib.png",
-				"../res/tag_compound.png",
-				"../res/tag_double.png"
-		};*/
 		
 		Random random = new Random();
 		int randomIcon = random.nextInt(icnArrayTest.length);
@@ -83,7 +71,7 @@ public class Main {
 		Style byteTag = tPane.addStyle("TAG_Byte", null);
 		StyleConstants.setFontSize(byteTag, 16);
 		StyleConstants.setForeground(byteTag, Color.WHITE);
-		ImageIcon iconByteTag = new ImageIcon(icnArrayTest[2]);
+		ImageIcon iconByteTag = new ImageIcon(icnArrayTest[1]);
 		Image imageByteRescale = iconByteTag.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
 		iconByteTag = new ImageIcon(imageByteRescale);
 		StyleConstants.setIcon(byteTag, iconByteTag);
@@ -91,7 +79,7 @@ public class Main {
 		Style compoundTag = tPane.addStyle("TAG_Compound", null);
 		StyleConstants.setFontSize(compoundTag, 16);
 		StyleConstants.setForeground(compoundTag, Color.WHITE);
-		ImageIcon iconCompoundTag = new ImageIcon(icnArrayTest[5]);
+		ImageIcon iconCompoundTag = new ImageIcon(icnArrayTest[2]);
 		Image imageCompoundRescale = iconCompoundTag.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
 		iconCompoundTag = new ImageIcon(imageCompoundRescale);
 		StyleConstants.setIcon(compoundTag, iconCompoundTag);
@@ -99,7 +87,7 @@ public class Main {
 		Style endTag = tPane.addStyle("TAG_End", null);
 		StyleConstants.setFontSize(endTag, 16);
 		StyleConstants.setForeground(endTag, Color.WHITE);
-		ImageIcon iconEndTag = new ImageIcon(Main.class.getResource("/tag_end.png"));
+		ImageIcon iconEndTag = new ImageIcon(MainGitHub.class.getResource("/tag_end.png"));
 		Image imageEndRescale = iconEndTag.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
 		iconEndTag = new ImageIcon(imageEndRescale);
 		StyleConstants.setIcon(endTag, iconEndTag);
@@ -107,32 +95,34 @@ public class Main {
 		Style doubleTag = tPane.addStyle("TAG_Double", null);
 		StyleConstants.setFontSize(doubleTag, 16);
 		StyleConstants.setForeground(doubleTag, Color.WHITE);
-		ImageIcon iconDoubleTag = new ImageIcon(icnArrayTest[6]);
+		ImageIcon iconDoubleTag = new ImageIcon(icnArrayTest[3]);
 		Image imageDoubleRescale = iconDoubleTag.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
 		iconDoubleTag = new ImageIcon(imageDoubleRescale);
 		StyleConstants.setIcon(doubleTag, iconDoubleTag);
 		
+		Style intArrayTag = tPane.addStyle("TAG_Int_Array", null);
+		StyleConstants.setFontSize(intArrayTag, 16);
+		StyleConstants.setForeground(intArrayTag, Color.WHITE);
+		ImageIcon iconIntArrayTag = new ImageIcon(icnArrayTest[4]);
+		Image imageIntArrayRescale = iconIntArrayTag.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+		iconIntArrayTag = new ImageIcon(imageIntArrayRescale);
+		StyleConstants.setIcon(intArrayTag, iconIntArrayTag);
+		
+		Style shortTag = tPane.addStyle("TAG_Short", null);
+		StyleConstants.setFontSize(shortTag, 16);
+		StyleConstants.setForeground(shortTag, Color.WHITE);
+		ImageIcon iconShortTag = new ImageIcon(icnArrayTest[5]);
+		Image imageShortRescale = iconShortTag.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
+		iconShortTag = new ImageIcon(imageShortRescale);
+		StyleConstants.setIcon(shortTag, iconShortTag);
+		
 		Style configStyle = tPane.addStyle("config", null);
 		StyleConstants.setFontSize(configStyle, 16);
 		StyleConstants.setForeground(configStyle, Color.WHITE);
-		ImageIcon iconConfig = new ImageIcon(Main.class.getResource("/settings_icon.png"));
+		ImageIcon iconConfig = new ImageIcon(MainGitHub.class.getResource("/settings_icon.png"));
 		Image imageConfigRescale = iconConfig.getImage().getScaledInstance(16, 16, Image.SCALE_SMOOTH);
 		iconConfig = new ImageIcon(imageConfigRescale);
 		StyleConstants.setIcon(configStyle, iconConfig);
-		
-		// Commands
-		// setFileOutput("file.extension")
-		Pattern setFileOutput = Pattern.compile("(config setFileOutput\\(\"([a-zA-Z0-9_\\.]+)\"\\))");
-		// createListTag("Name", typeOfElement, listLength)
-		Pattern addListTag = Pattern.compile("(nbt createListTag\\(\"([a-zA-Z0-9_]*)\", (\\d+), (\\d+)\\))");
-		// createByteTag("Name", value, isForList: boolean)
-		Pattern addByteTag = Pattern.compile("(nbt createByteTag\\(\"([a-zA-Z0-9_]*)\", (\\d+), (true|false)\\))");
-		// createEndTag()
-		Pattern addEndTag = Pattern.compile("(nbt createEndTag\\(\\))");
-		// createCompoundTag("Name", isForList: boolean)
-		Pattern addCompoundTag = Pattern.compile("(nbt createCompoundTag\\(\"([a-zA-Z0-9_]*)\", (true|false)\\))");
-		// createDoubleTag("Name", value, isForList: boolean)
-		Pattern addDoubleTag = Pattern.compile("(nbt createDoubleTag\\(\"([a-zA-Z0-9_]*)\", ([\\d\\.]+), (true|false)\\))");
 		
 		// Icon Decoration v0.0.1
 		// cfg
@@ -143,13 +133,24 @@ public class Main {
 		Pattern icon_CompoundTag = Pattern.compile("\\[10\\]");
 		Pattern icon_EndTag = Pattern.compile("\\[0\\]");
 		Pattern icon_DoubleTag = Pattern.compile("\\[6\\]");
+		Pattern icon_IntArrayTag = Pattern.compile("\\[11\\]");
+		Pattern icon_ShortTag = Pattern.compile("\\[2\\]");
 		
 		// New Commands
+		// [9]("Name", typeOfElement: tagID, listLength)
 		Pattern ListTag = Pattern.compile("(\\[9\\]\\(\"([a-zA-Z0-9]*)\", (\\d+), (\\d+)\\))");
+		// [1]("Name", value, isForList: boolean)
 		Pattern ByteTag = Pattern.compile("(\\[1\\]\\(\"([a-zA-Z0-9]*)\", (\\d+), (true|false)\\))");
+		// [10]("Name", isForList: boolean)
 		Pattern CompoundTag = Pattern.compile("(\\[10\\]\\(\"([a-zA-Z0-9]*)\", (true|false)\\))");
-		Pattern EndTag = Pattern.compile("(\\[0\\]\\(\\))");
+		// [0](amount: optional)
+		Pattern EndTag = Pattern.compile("(\\[0\\]\\((\\d*)\\))");
+		// [6]("Name", value, isForList: boolean)
 		Pattern DoubleTag = Pattern.compile("(\\[6\\]\\(\"([a-zA-Z0-9]*)\", ([\\d\\.]+), (true|false)\\))");
+		// [11]("Name", arrayLength, isForList: boolean)
+		Pattern IntArrayTag = Pattern.compile("(\\[11\\]\\(\"([a-zA-Z0-9]*)\", (\\d+), (true|false)\\))");
+		// [2]("Name", value, isForList: boolean)
+		Pattern ShortTag = Pattern.compile("(\\[2\\]\\(\"([a-zA-Z0-9_]*)\", (\\d+), (true|false)\\))");
 		
 		// cfg Commands
 		Pattern setOutputFile = Pattern.compile("(cfg setOutputFile\\(\"([a-zA-Z0-9_\\.]+)\"\\))");
@@ -162,6 +163,7 @@ public class Main {
 		
 		// overwrite
 		Pattern overwriteFromOffset = Pattern.compile("(overwrite fromOffset\\((\\d+), (\\d+)\\))");
+		
 		Document doc = tPane.getDocument();
 		doc.addDocumentListener(new DocumentListener() {
 			
@@ -195,6 +197,8 @@ public class Main {
 						Matcher CompoundTagICN = icon_CompoundTag.matcher(tPane.getText());
 						Matcher EndTagICN = icon_EndTag.matcher(tPane.getText());
 						Matcher DoubleTagICN = icon_DoubleTag.matcher(tPane.getText());
+						Matcher IntArrayTagICN = icon_IntArrayTag.matcher(tPane.getText());
+						Matcher ShortTagICN = icon_ShortTag.matcher(tPane.getText());
 						Matcher configICN = icon_cfg.matcher(tPane.getText());
 						
 						// New - Icons
@@ -224,10 +228,28 @@ public class Main {
 							}
 						}
 						
+						if (ShortTagICN.find()) {
+							try { 
+								doc.remove(ShortTagICN.end()-3, 3);
+								doc.insertString(0, "[2]", shortTag);
+							} catch (BadLocationException e) {
+								e.printStackTrace();
+							}
+						}
+						
 						if (CompoundTagICN.find()) {
 							try { 
 								doc.remove(CompoundTagICN.end()-4, 4);
 								doc.insertString(0, "[10]", compoundTag);
+							} catch (BadLocationException e) {
+								e.printStackTrace();
+							}
+						}
+						
+						if (IntArrayTagICN.find()) {
+							try { 
+								doc.remove(IntArrayTagICN.end()-4, 4);
+								doc.insertString(0, "[11]", intArrayTag);
 							} catch (BadLocationException e) {
 								e.printStackTrace();
 							}
@@ -267,6 +289,7 @@ public class Main {
 			public void keyPressed(KeyEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					tPane.setCaretPosition(tPane.getText().length());
 					update();
 				}
 			}
@@ -277,7 +300,7 @@ public class Main {
 				
 			}
 			
-private void update() {
+			private void update() {
 				
 				Runnable test = new Runnable() {
 
@@ -289,18 +312,13 @@ private void update() {
 						Matcher CompoundTagCMD = CompoundTag.matcher(tPane.getText());
 						Matcher EndTagCMD = EndTag.matcher(tPane.getText());
 						Matcher DoubleTagCMD = DoubleTag.matcher(tPane.getText());
-						Matcher fileOutputCMD = setOutputFile.matcher(tPane.getText());
+						Matcher IntArrayTagCMD = IntArrayTag.matcher(tPane.getText());
+						Matcher ShortTagCMD = ShortTag.matcher(tPane.getText());
+						Matcher fileOutputCMD = setOutputFile.matcher(tPane.getText()); 
 						Matcher delDataCMD = deleteFromOffsetPlusSize.matcher(tPane.getText());
 						Matcher readDataCMD = readFromOffsetPlusSize.matcher(tPane.getText());
 						Matcher overwriteDataCMD = overwriteFromOffset.matcher(tPane.getText());
 						
-						// Commands - Old
-						Matcher addListTagMT = addListTag.matcher(tPane.getText());
-						Matcher addByteTagMT = addByteTag.matcher(tPane.getText());
-						Matcher addCompoundTagMT = addCompoundTag.matcher(tPane.getText());
-						Matcher addEndTagMT = addEndTag.matcher(tPane.getText());
-						Matcher addDoubleTagMT = addDoubleTag.matcher(tPane.getText());
-						Matcher fileOutputMT = setFileOutput.matcher(tPane.getText());
 						
 						// New
 						// Configs
@@ -438,6 +456,43 @@ private void update() {
 							System.out.print("Done!");
 						}
 						
+						if (IntArrayTagCMD.find()) {
+							File file = new File(fileOutput);
+							if (file.exists() && file.isFile()) {
+								try {
+									FileOutputStream fos = new FileOutputStream(file, true);
+									DataOutputStream dos = new DataOutputStream(fos);
+									
+									if (IntArrayTagCMD.group(4).equals("false")) {
+										dos.writeByte(11);
+										dos.writeShort(IntArrayTagCMD.group(2).length());
+										dos.write(IntArrayTagCMD.group(2).getBytes(StandardCharsets.UTF_8));
+									}
+									dos.writeInt(Integer.parseInt(IntArrayTagCMD.group(3)));
+									
+									fos.close();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							} else {
+								try {
+									FileOutputStream fos = new FileOutputStream(file);
+									DataOutputStream dos = new DataOutputStream(fos);
+									
+									if (IntArrayTagCMD.group(4).equals("false")) {
+										dos.writeByte(11);
+										dos.writeShort(IntArrayTagCMD.group(2).length());
+										dos.write(IntArrayTagCMD.group(2).getBytes(StandardCharsets.UTF_8));
+									}
+									dos.writeInt(Integer.parseInt(IntArrayTagCMD.group(3)));
+									
+									fos.close();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							}
+ 						}
+						
 						if (ByteTagCMD.find()) {
 							File file = new File(fileOutput);
 							if (file.exists() && file.isFile()) {
@@ -474,6 +529,53 @@ private void update() {
 										dos.writeByte(Integer.parseInt(ByteTagCMD.group(3)));
 									} else {
 										dos.writeByte(127);
+									}
+									
+									fos.close();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							}
+							tPane.setText("");
+							System.out.print("Done!");
+						}
+						
+						if (ShortTagCMD.find()) {
+							File file = new File(fileOutput);
+							if (file.exists() && file.isFile()) {
+								try {
+									FileOutputStream fos = new FileOutputStream(file, true);
+									DataOutputStream dos = new DataOutputStream(fos);
+									
+									if (ShortTagCMD.group(4).equals("false")) {
+										dos.writeByte(1);
+										dos.writeShort(ShortTagCMD.group(2).length());
+										dos.write(ShortTagCMD.group(2).getBytes(StandardCharsets.UTF_8));
+									}
+									if (Integer.parseInt(ShortTagCMD.group(3)) < 32767) {
+										dos.writeByte(Integer.parseInt(ShortTagCMD.group(3)));
+									} else {
+										dos.writeByte(32767);
+									}
+									fos.close();
+									
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
+							} else {
+								try {
+									FileOutputStream fos = new FileOutputStream(file);
+									DataOutputStream dos = new DataOutputStream(fos);
+									
+									if (ShortTagCMD.group(4).equals("false")) {
+										dos.writeByte(1);
+										dos.writeShort(ShortTagCMD.group(2).length());
+										dos.write(ShortTagCMD.group(2).getBytes(StandardCharsets.UTF_8));
+									}
+									if (Integer.parseInt(ShortTagCMD.group(3)) < 32767) {
+										dos.writeByte(Integer.parseInt(ShortTagCMD.group(3)));
+									} else {
+										dos.writeByte(32767);
 									}
 									
 									fos.close();
@@ -533,7 +635,13 @@ private void update() {
 									FileOutputStream fos = new FileOutputStream(file, true);
 									DataOutputStream dos = new DataOutputStream(fos);
 									
-									dos.writeByte(0);
+									if (!EndTagCMD.group(2).isBlank()) {
+										for (int i = 0; i < Integer.parseInt(EndTagCMD.group(2)); i++) {
+											dos.writeByte(0);
+										}
+									} else {
+										dos.writeByte(0);
+									}
 									
 									fos.close();
 									
@@ -545,7 +653,13 @@ private void update() {
 									FileOutputStream fos = new FileOutputStream(file);
 									DataOutputStream dos = new DataOutputStream(fos);
 									
-									dos.writeByte(0);
+									if (!EndTagCMD.group(2).isBlank()) {
+										for (int i = 0; i < Integer.parseInt(EndTagCMD.group(2)); i++) {
+											dos.writeByte(0);
+										}
+									} else {
+										dos.writeByte(0);
+									}
 									
 									fos.close();
 								} catch (IOException e) {
@@ -595,201 +709,6 @@ private void update() {
 							tPane.setText("");
 							System.out.print("Done!");
 						}
-						
-						// Configs
-						if (fileOutputMT.find()) {
-							fileOutput = fileOutputMT.group(2);
-							tPane.getText().replaceAll("(config setFileOutput\\(\"([a-zA-Z0-9_\\.]+)\\))", "");
-							System.out.println("File output changed to: \""+fileOutputMT.group(2)+"\".");
-						}
-						
-						// Old (reference)
-						if (addListTagMT.find()) {
-							File file = new File(fileOutput);
-							tPane.getText().replaceAll("(nbt createListTag\\(\"([a-zA-Z0-9_]*)\", (\\d+), (\\d+)\\))", "");
-							if (file.exists() && file.isFile()) {
-								try {
-									FileOutputStream fos = new FileOutputStream(file, true);
-									DataOutputStream dos = new DataOutputStream(fos);
-									
-									dos.writeByte(9);
-									dos.writeShort(addListTagMT.group(2).length());
-									dos.write(addListTagMT.group(2).getBytes(StandardCharsets.UTF_8));
-									dos.writeByte(Integer.parseInt(addListTagMT.group(3)));
-									dos.writeInt(Integer.parseInt(addListTagMT.group(4)));
-									
-									fos.close();
-									
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							} else {
-								try {
-									FileOutputStream fos = new FileOutputStream(file);
-									DataOutputStream dos = new DataOutputStream(fos);
-									
-									dos.writeByte(9);
-									dos.writeShort(addListTagMT.group(2).length());
-									dos.write(addListTagMT.group(2).getBytes(StandardCharsets.UTF_8));
-									dos.writeByte(Integer.parseInt(addListTagMT.group(3)));
-									dos.writeInt(Integer.parseInt(addListTagMT.group(4)));
-									
-									fos.close();
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							}
-						}
-						if (addByteTagMT.find()) {
-							File file = new File(fileOutput);
-							tPane.getText().replaceAll("(nbt createByteTag\\(\"([a-zA-Z0-9_]*)\", (\\d+), (true|false)\\))", "");
-							if (file.exists() && file.isFile()) {
-								try {
-									FileOutputStream fos = new FileOutputStream(file, true);
-									DataOutputStream dos = new DataOutputStream(fos);
-									
-									if (addByteTagMT.group(4).equals("false")) {
-										dos.writeByte(1);
-										dos.writeShort(addByteTagMT.group(2).length());
-										dos.write(addByteTagMT.group(2).getBytes(StandardCharsets.UTF_8));
-									}
-									if (Integer.parseInt(addByteTagMT.group(3)) < 127) {
-										dos.writeByte(Integer.parseInt(addByteTagMT.group(3)));
-									} else {
-										dos.writeByte(127);
-									}
-									fos.close();
-									
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							} else {
-								try {
-									FileOutputStream fos = new FileOutputStream(file);
-									DataOutputStream dos = new DataOutputStream(fos);
-									
-									if (addByteTagMT.group(4).equals("false")) {
-										dos.writeByte(1);
-										dos.writeShort(addByteTagMT.group(2).length());
-										dos.write(addByteTagMT.group(2).getBytes(StandardCharsets.UTF_8));
-									}
-									if (Integer.parseInt(addByteTagMT.group(3)) < 127) {
-										dos.writeByte(Integer.parseInt(addByteTagMT.group(3)));
-									} else {
-										dos.writeByte(127);
-									}
-									
-									fos.close();
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							}
-						}
-						if (addCompoundTagMT.find()) {
-							File file = new File(fileOutput);
-							tPane.getText().replaceAll("(nbt createCompoundTag\\(\"([a-zA-Z0-9_]*)\", (true|false)\\))", "");
-							if (file.exists() && file.isFile()) {
-								try {
-									FileOutputStream fos = new FileOutputStream(file, true);
-									DataOutputStream dos = new DataOutputStream(fos);
-									
-									if (addCompoundTagMT.group(3).equals("false")) {
-										dos.writeByte(10);
-										dos.writeShort(addCompoundTagMT.group(2).length());
-										dos.write(addCompoundTagMT.group(2).getBytes());
-									} else {
-										System.err.println("To insert TAG_Compound inside a TAG_List, you need a TAG_End for each compound.");
-									}
-									
-									fos.close();
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							} else {
-								try {
-									FileOutputStream fos = new FileOutputStream(file);
-									DataOutputStream dos = new DataOutputStream(fos);
-									
-									if (addCompoundTagMT.group(3).equals("false")) {
-										dos.writeByte(10);
-										dos.writeShort(addCompoundTagMT.group(2).length());
-										dos.write(addCompoundTagMT.group(2).getBytes());
-									} else {
-										System.err.println("To insert TAG_Compound inside a TAG_List, you need a TAG_End for each compound.");
-									}
-									
-									fos.close();
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							}
-						}
-						if (addEndTagMT.find()) {
-							File file = new File(fileOutput);
-							tPane.getText().replaceAll("(nbt createEndTag\\(\\))", "");
-							if (file.exists() && file.isFile()) {
-								try {
-									FileOutputStream fos = new FileOutputStream(file, true);
-									DataOutputStream dos = new DataOutputStream(fos);
-									
-									dos.writeByte(0);
-									
-									fos.close();
-									
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							} else {
-								try {
-									FileOutputStream fos = new FileOutputStream(file);
-									DataOutputStream dos = new DataOutputStream(fos);
-									
-									dos.writeByte(0);
-									
-									fos.close();
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							}
-						}
-						if (addDoubleTagMT.find()) {
-							File file = new File(fileOutput);
-							tPane.getText().replaceAll("(nbt createDoubleTag\\(\"([a-zA-Z0-9_]*)\", ([\\d\\.]+), (true|false)\\))", "");
-							if (file.exists() && file.isFile()) {
-								try {
-									FileOutputStream fos = new FileOutputStream(file, true);
-									DataOutputStream dos = new DataOutputStream(fos);
-									
-									if (addDoubleTagMT.group(4).equals("false")) {
-										dos.writeByte(6);
-										dos.writeShort(addDoubleTagMT.group(2).length());
-										dos.write(addDoubleTagMT.group(2).getBytes());
-									}
-									dos.writeDouble(Double.parseDouble(addDoubleTagMT.group(3)));
-									
-									fos.close();
-									
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							} else {
-								try {
-									FileOutputStream fos = new FileOutputStream(file);
-									DataOutputStream dos = new DataOutputStream(fos);
-									
-									if (addDoubleTagMT.group(4).equals("false")) {
-										dos.writeByte(6);
-										dos.writeShort(addDoubleTagMT.group(2).length());
-										dos.write(addDoubleTagMT.group(2).getBytes());
-									}
-									dos.writeDouble(Double.parseDouble(addDoubleTagMT.group(3)));
-									
-									fos.close();
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-							}
-						}
 					}
 				};
 				SwingUtilities.invokeLater(test);
@@ -801,6 +720,6 @@ private void update() {
 		
 	}
 	public static void main(String[] args) {
-		new Main().Window();
+		new MainGitHub().Window();
 	}
 }
