@@ -6,7 +6,7 @@ For now it doesn't support creating GZip or Deflate for other ocasions but, it's
 ## It now supports:
 
 - Reading/Overwriting/Deleting Bytes
-- Some tags like `TAG_Double`, `TAG_Byte`, `TAG_List`, `TAG_Compound` and `TAG_End`.
+- Some tags like `TAG_Double`, `TAG_Byte`, `TAG_List`, `TAG_Compound`, `TAG_Short`, `TAG_Int_Array` and `TAG_End`.
 
 ## How to use?
 
